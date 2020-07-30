@@ -15,21 +15,15 @@ class UrlForm(ModelForm):
 
     def clean_url(self):
         """
-        Checks if url is valid and returns 200 OK code
-        :return:
+        Checks if url is valid. Raises Validation error if response code is other than success or redirect
         """
         url = self.cleaned_data['url']
         session = requests.Session()
         session.mount(url, HTTPAdapter(max_retries=3))
         try:
-            response = session.get(url, timeout=5)
-            if response.status_code != 200:
+            response = session.get(url, timeout=(5, 10))
+            if response.status_code < 200 or response.status_code > 399:
                 raise ConnectionError
         except (ConnectionError, TimeoutError):
-            raise ValidationError('Bad url')
-
+            raise ValidationError('Bad url - connection error')
         return url
-
-
-
-
