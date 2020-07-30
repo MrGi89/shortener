@@ -1,3 +1,11 @@
 from django.contrib import admin
 
-# Register your models here.
+from shortener.models import UrlModel
+
+
+class UrlModelAdmin(admin.ModelAdmin):
+    list_display = ('slug', 'url',)
+    list_per_page = 50
+
+
+admin.site.register(UrlModel, UrlModelAdmin)
