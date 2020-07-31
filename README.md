@@ -5,7 +5,7 @@
 App is available for free on: https://jmrshortener.herokuapp.com/. App provides possibility to shorten passed url. 
 
 
-![main-site](https://github.com/MrGi89/shortener/blob/master/preview/preview2.png)
+![main-site](https://github.com/MrGi89/shortener/blob/master/preview/preview.png)
 
 
 **PREREQUIREMENTS:**
