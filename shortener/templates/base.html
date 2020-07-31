@@ -9,6 +9,7 @@
         .container {
             align-items: center;
             margin-top: 2rem;
+            padding: 1rem;
         }
 
         .container-box {
@@ -18,9 +19,15 @@
         ul {
             margin-bottom: 0;
         }
+        h5 {
+            margin-bottom: 1rem;
+        }
     </style>
 </head>
 <body>
+    <nav class="navbar navbar-dark bg-primary">
+        <a class="navbar-brand" href="/"><b>URL</b>shortener</a>
+    </nav>
 
     {% for field, error in form_errors.items %}
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -33,9 +40,9 @@
 
     <div class="card container">
         <div class="card-body container-box">
-            <form action="#" method="POST">
+            <form method="POST">
                 {% csrf_token %}
-                <h4>Paste the URL to be shortened</h4>
+                <h5>Paste the URL to be shortened</h5>
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Enter the link" name="url" required="required"
                            aria-label="user-link" aria-describedby="button-addon"
@@ -53,11 +60,11 @@
             <div class="card-body container-box">
                 <form>
                     {% csrf_token %}
-                    <h4>Your shortened URL</h4>
+                    <h5>Your shortened URL</h5>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" disabled="disabled" id="copy"
                                aria-label="user-link" aria-describedby="button-addon2"
-                               value="http{% if request.is_secure %}s{% endif %}://{{ new_url }}">
+                               value="http{% if request.is_secure %}s{% endif %}://{{ new_url.get_absolute_url }}">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="button" id="button-addon2"
                                     onclick="copyToClipboard('#copy')">Copy URL
@@ -68,6 +75,12 @@
             </div>
         </div>
     {% endif %}
+
+    <footer class="page-footer font-small blue fixed-bottom">
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+            <a href="/"><b>URL</b>shortener</a>
+        </div>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

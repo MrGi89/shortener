@@ -26,7 +26,7 @@ class UrlView(View):
                     slug = get_random_string(length=6)
                 url.slug = slug
                 url.save()
-            return render(request, 'base.html', context={'new_url': url.get_absolute_url()})
+            return render(request, 'base.html', context={'new_url': url})
         return render(request, 'base.html', context={'form_errors': form.errors})
 
 
